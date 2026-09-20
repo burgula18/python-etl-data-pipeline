@@ -1,0 +1,13 @@
+customer_id,customer_name,email,state,signup_date
+C001,John Smith,john.smith@email.com,TX,2026-01-10
+C002,Sarah Johnson,sarah.j@email.com,FL,2026-01-15
+C003,Michael Brown,michael.b@email.com,NC,2026-02-01
+C004,Emily Davis,,GA,2026-02-10
+C005,David Wilson,david.w@email.com,TX,2026-02-18
+C006,Lisa Anderson,lisa.a@email.com,FL,2026-03-01
+C007,Robert Taylor,robert.t@email.com,NC,2026-03-08
+C008,Jennifer Thomas,jennifer.t@email.com,,2026-03-15
+C009,William Moore,william.m@email.com,CA,2026-04-01
+C010,Amanda Martin,amanda.m@email.com,TX,2026-04-12
+C010,Amanda Martin,amanda.m@email.com,TX,2026-04-12
+C011,Daniel Lee,daniel.l@email.com,FL,

@@ -229,3 +229,45 @@ def load_data(enriched_orders):
     print(f"Processed file created: {output_file}")
 
     return output_file
+
+# ------------------------------
+# Step 7: Run ETL Pipeline
+# ------------------------------
+
+def run_pipeline():
+    """Run the complete ETL pipeline."""
+
+    print("Starting Python ETL Pipeline...")
+
+    # Step 1 - Extract
+    customers, orders, products = extract_data()
+
+    # Step 2 - Clean
+    customers, orders, products = clean_data(
+        customers,
+        orders,
+        products
+    )
+
+    # Step 3 - Transform
+    orders = transform_data(orders)
+
+    # Step 4 - Join datasets
+    enriched_orders = join_data(
+        orders,
+        customers,
+        products
+    )
+
+    # Step 5 - Validate
+    validate_data(enriched_orders)
+
+    # Step 6 - Load
+    output_file = load_data(enriched_orders)
+
+    print("ETL Pipeline completed successfully.")
+    print(f"Output file: {output_file}")
+
+
+if __name__ == "__main__":
+    run_pipeline()

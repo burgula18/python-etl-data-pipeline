@@ -202,3 +202,30 @@ def validate_data(enriched_orders):
         print(f"Data validation found {total_errors} issue(s).")
 
     return total_errors
+
+# -----------------------------
+# Load
+# -----------------------------
+
+def load_data(enriched_orders):
+    """Load the final processed dataset to the processed data folder."""
+
+    # Create processed directory if it does not exist
+    PROCESSED_DATA_DIR.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    # Define output file
+    output_file = PROCESSED_DATA_DIR / "enriched_orders.csv"
+
+    # Write processed DataFrame to CSV
+    enriched_orders.to_csv(
+        output_file,
+        index=False
+    )
+
+    print("Data load completed.")
+    print(f"Processed file created: {output_file}")
+
+    return output_file

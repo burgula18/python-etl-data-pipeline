@@ -117,3 +117,30 @@ def transform_data(customers, orders, products):
     print("Data transformation completed.")
 
     return customers, orders, products
+
+# -----------------------------
+# Join / Merge
+# -----------------------------
+
+def join_data(customers, orders, products):
+    """Join customer, order, and product datasets."""
+
+    # Join orders with customer information
+    customer_orders = orders.merge(
+        customers,
+        on="customer_id",
+        how="left"
+    )
+
+    # Join the result with product information
+    enriched_orders = customer_orders.merge(
+        products,
+        on="product_id",
+        how="left",
+        suffixes=("_order", "_product")
+    )
+
+    print("Data joins completed.")
+    print("Enriched order records:", len(enriched_orders))
+
+    return enriched_orders

@@ -144,3 +144,61 @@ def join_data(customers, orders, products):
     print("Enriched order records:", len(enriched_orders))
 
     return enriched_orders
+
+# -----------------------------
+# Data Validation
+# -----------------------------
+
+def validate_data(enriched_orders):
+    """Validate the transformed and joined dataset."""
+
+    print("Starting data validation...")
+
+    # 1. Check for duplicate orders
+    duplicate_orders = enriched_orders["order_id"].duplicated().sum()
+
+    # 2. Check for missing critical values
+    missing_order_ids = enriched_orders["order_id"].isna().sum()
+    missing_customer_ids = enriched_orders["customer_id"].isna().sum()
+    missing_product_ids = enriched_orders["product_id"].isna().sum()
+
+    # 3. Validate quantity and price
+    invalid_quantity = (enriched_orders["quantity"] <= 0).sum()
+    invalid_price = (enriched_orders["unit_price"] < 0).sum()
+
+    # 4. Validate calculated order amount
+    invalid_order_amount = (enriched_orders["order_amount"] < 0).sum()
+
+    # 5. Check for invalid order dates
+    invalid_dates = enriched_orders["order_date"].isna().sum()
+
+    # Display validation results
+    print("Validation Results")
+    print("------------------")
+    print("Duplicate orders:", duplicate_orders)
+    print("Missing order IDs:", missing_order_ids)
+    print("Missing customer IDs:", missing_customer_ids)
+    print("Missing product IDs:", missing_product_ids)
+    print("Invalid quantities:", invalid_quantity)
+    print("Invalid unit prices:", invalid_price)
+    print("Invalid order amounts:", invalid_order_amount)
+    print("Invalid order dates:", invalid_dates)
+
+    # Overall validation result
+    total_errors = (
+        duplicate_orders
+        + missing_order_ids
+        + missing_customer_ids
+        + missing_product_ids
+        + invalid_quantity
+        + invalid_price
+        + invalid_order_amount
+        + invalid_dates
+    )
+
+    if total_errors == 0:
+        print("Data validation PASSED.")
+    else:
+        print(f"Data validation found {total_errors} issue(s).")
+
+    return total_errors

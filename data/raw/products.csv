@@ -1,0 +1,9 @@
+product_id,product_category,product_name,supplier,unit_cost
+P101,Electronics,Laptop,TechSource,550.00
+P102,Electronics,Monitor,TechSource,180.00
+P103,Furniture,Office Chair,OfficeSupply,220.00
+P104,Furniture,Desk,OfficeSupply,350.00
+P105,Accessories,Keyboard,AccessoryHub,35.00
+P106,Accessories,Mouse,AccessoryHub,20.00
+P107,Accessories,Headset,AccessoryHub,45.00
+P108,Electronics,Tablet,TechSource,300.00

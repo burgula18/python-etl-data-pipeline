@@ -82,3 +82,38 @@ def clean_data(customers, orders, products):
     print("Data cleaning completed.")
 
     return customers, orders, products
+
+# -----------------------------
+# Transform
+# -----------------------------
+
+def transform_data(customers, orders, products):
+    """Apply business transformations to the datasets."""
+
+    # Calculate total amount for each order
+    orders["order_amount"] = (
+        orders["quantity"] * orders["unit_price"]
+    )
+
+    # Standardize order status
+    orders["status"] = (
+        orders["status"]
+        .str.strip()
+        .str.title()
+    )
+
+    # Create order year and month for reporting
+    orders["order_year"] = orders["order_date"].dt.year
+    orders["order_month"] = orders["order_date"].dt.month
+
+    # Create a customer full name if first/last name columns exist
+    if {"first_name", "last_name"}.issubset(customers.columns):
+        customers["customer_name"] = (
+            customers["first_name"].fillna("").str.strip()
+            + " "
+            + customers["last_name"].fillna("").str.strip()
+        ).str.strip()
+
+    print("Data transformation completed.")
+
+    return customers, orders, products

@@ -33,3 +33,52 @@ def extract_data():
     print("Products loaded:", len(products))
 
     return customers, orders, products
+
+# -----------------------------
+# Clean
+# -----------------------------
+
+def clean_data(customers, orders, products):
+    """Clean raw datasets before transformation."""
+
+    # Remove duplicate records
+    customers = customers.drop_duplicates()
+    orders = orders.drop_duplicates()
+    products = products.drop_duplicates()
+
+    # Clean column names
+    customers.columns = customers.columns.str.strip().str.lower()
+    orders.columns = orders.columns.str.strip().str.lower()
+    products.columns = products.columns.str.strip().str.lower()
+
+    # Handle missing customer values
+    if "state" in customers.columns:
+        customers["state"] = customers["state"].fillna("Unknown")
+
+    # Convert order date to datetime
+    orders["order_date"] = pd.to_datetime(
+        orders["order_date"],
+        errors="coerce"
+    )
+
+    # Ensure numeric columns contain numeric values
+    orders["quantity"] = pd.to_numeric(
+        orders["quantity"],
+        errors="coerce"
+    )
+
+    orders["unit_price"] = pd.to_numeric(
+        orders["unit_price"],
+        errors="coerce"
+    )
+
+    # Remove records missing critical identifiers
+    customers = customers.dropna(subset=["customer_id"])
+    orders = orders.dropna(
+        subset=["order_id", "customer_id", "product_id"]
+    )
+    products = products.dropna(subset=["product_id"])
+
+    print("Data cleaning completed.")
+
+    return customers, orders, products

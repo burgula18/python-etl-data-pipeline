@@ -247,14 +247,14 @@ def run_pipeline():
         customers,
         orders,
         products
-    )
-
+    )   
+    
     # Step 3 - Transform
-customers, orders, products = transform_data(
-    customers,
-    orders,
-    products
-)
+    customers, orders, products = transform_data(
+        customers,
+        orders,
+        products
+    )
 
     # Step 4 - Join datasets
     enriched_orders = join_data(

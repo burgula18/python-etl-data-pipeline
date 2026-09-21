@@ -114,6 +114,13 @@ def transform_data(customers, orders, products):
             + customers["last_name"].fillna("").str.strip()
         ).str.strip()
 
+    # Standardize join key data types
+customers["customer_id"] = customers["customer_id"].astype(str)
+orders["customer_id"] = orders["customer_id"].astype(str)
+
+products["product_id"] = products["product_id"].astype(str)
+orders["product_id"] = orders["product_id"].astype(str)
+
     print("Data transformation completed.")
 
     return customers, orders, products

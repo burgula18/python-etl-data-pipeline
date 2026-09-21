@@ -263,12 +263,12 @@ def run_pipeline():
         products
     )
 
-    # Step 4 - Join datasets
-enriched_orders = join_data(
-    customers,
-    orders,
-    products
-)
+        # Step 4 - Join datasets
+    enriched_orders = join_data(
+        customers,
+        orders,
+        products
+    )
 
     # Step 5 - Validate
     validate_data(enriched_orders)
